@@ -181,3 +181,50 @@ because several major injury-related risk factors were present.
 # Saving and Reusing the Model
 The trained model was saved as a .pkl file using joblib. This allows the model to be reused later
 without needing to retrain it every time the program runs.
+
+## Phase 4
+# Adding New Data to the Dataset
+For the final phase of my project, I created a process that allows new workout and recovery data to be added to the existing dataset. The goal was to simulate how a real-world machine learning system would be able to grow over time when new information is added. 
+The program loads the existing gym injury dataset and then adds a new user record that contains workout, recovery, and health-related information.
+# Preventing Duplicate Records
+After I added the new record, I used drop_duplicates() to make sure duplicate rows weren’t added to the dataset. This helps keep the data cleaner and prevents the model from repeatedly training on the exact same information. This also allows the program to run multiple times without disrupting the current dataset. 
+# New Record and Prediction
+The new record that was added included:
+Age
+Workout frequency
+Workout duration
+Intensity level
+Sleep hours
+Recovery days
+Warm-up completion
+Previous injuries
+Pain level after workouts
+Hydration level
+Gender
+Workout type
+I kept the same user example from the last phase:
+Age: 18
+Workout frequency: 2 days per week
+Workout duration: 60 minutes
+Intensity level: High
+Sleep hours: 6
+Recovery days: 4
+Warm-up completion: No
+Previous injuries: Yes
+Pain level after workouts: 4/10
+Hydration level: Medium
+Gender: Female
+Workout type: Strength training
+The model predicted that this user had a high injury risk. This prediction was then added to the new record for future validation and retraining purposes. 
+# Retraining the Model
+After I integrated the new data, I retrained the machine learning model using the updated dataset. I used Logistic Regression again because it was the best-performing model as I learned from the previous phases. 
+The updated dataset was cleaned, encoded, split into training and testing groups, and then processed through the model again.
+This phase simulated how machine learning systems are continuously retrained as more data becomes available over time. 
+# Saving the Updated Files
+After retraining the model the updated dataset was saved as a new CSV file and the updated training model was saved as a new .pkl file to allow the final trained model to continue being reused, just like previous phases. (There’s a recurring theme here.)
+# Updated Visualizations
+For this final phase, I also regenerated visualizations using the updated dataset and retrained the model. These included the final confusion matrix and an updated injury risk distribution chart. 
+These helped confirm that the model was still performing effectively after adding the new data. 
+# Issues I Observed
+One issue I encountered during this phase involved missing values in the Injury_Risk label column. Initially, the new record didn’t contain an Injury_Risk value, which caused the train/test split process to fail because the label contained a null value. 
+To fix this issue, I added the predicted injury risk value to the new record before retraining the model. Since the model predicted the new user as High risk, I added High as the injury risk label for the new record. 
